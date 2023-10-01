@@ -56,7 +56,9 @@ class CalculatorTest {
 	@Test()
 	void maxWithNumbers() {
 		double expectedMax = 2.0;
-		calculator.add(2.0);
+		Vector<Double> state = new Vector<Double>();
+		state.add(expectedMax);
+		calculator = new Calculator(state);		
 		assertEquals(expectedMax, calculator.max(), "Expected max:" + expectedMax + "but got: " + calculator.max());
 	}
 
@@ -69,7 +71,9 @@ class CalculatorTest {
 	@Test()
 	void minWithNumbers() {
 		double expectedMin = 2.0;
-		calculator.add(2.0);
+		Vector<Double> state = new Vector<Double>();
+		state.add(expectedMin);
+		calculator = new Calculator(state);
 		assertEquals(expectedMin, calculator.min(), "Expected min:" + expectedMin + "but got: " + calculator.min());
 	}
 
@@ -82,8 +86,10 @@ class CalculatorTest {
 	@Test()
 	void averageWithNumbers() {
 		double expectedAverage = 5.0;
-		calculator.add(2.0);
-		calculator.add(8.0);
+		Vector<Double> state = new Vector<Double>();
+		state.add(2.0);
+		state.add(8.0);
+		calculator = new Calculator(state);
 		assertEquals(expectedAverage, calculator.average(), "Expected average:" + expectedAverage + "but got: " + calculator.average());
 	}
 
@@ -96,8 +102,10 @@ class CalculatorTest {
 	@Test()
 	void stddevWithNumbers() {
 		double expectedStddev = 0.0;
-		calculator.add(2.0);
-		calculator.add(2.0);
+		Vector<Double> state = new Vector<Double>();
+		state.add(2.0);
+		state.add(2.0);
+		calculator = new Calculator(state);
 		assertEquals(expectedStddev, calculator.stddev(), "Expected stddev:" + expectedStddev + "but got: " + calculator.stddev());
 	}
 }
