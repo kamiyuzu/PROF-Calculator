@@ -6,6 +6,14 @@ import java.lang.Double;
 public class Calculator {
 
 	public Vector <Double> numbers;
+
+	public Calculator(){
+		this.numbers = new Vector<Double>();
+	}
+
+	public Calculator(Vector<Double> numbers){
+		this.numbers = numbers;
+	}
 	
 	// Public methods
 	//
