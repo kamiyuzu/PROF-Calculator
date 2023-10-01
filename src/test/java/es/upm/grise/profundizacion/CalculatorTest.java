@@ -12,6 +12,7 @@ class CalculatorTest {
 
 	private Calculator calculator;
 	private Vector<Double> state;
+	private Vector<Double> expected_state;
 
 	@BeforeEach
 	public void init() {
@@ -19,13 +20,13 @@ class CalculatorTest {
 		calculator = new Calculator(state);
 		state.add(2.0);
 		state.add(2.0);
+		expected_state = new Vector<Double>();
 	}
 
 	@Test()
 	@DisplayName("Test init the calculator state")
 	void initCalculator() {
 		Double numberToAddAndRemove = 2.0;
-		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberToAddAndRemove);
 		expected_state.add(numberToAddAndRemove);
 		assertEquals(expected_state, calculator.numbers, "Checking the numbers from a freshly init Calculator class");
@@ -35,7 +36,6 @@ class CalculatorTest {
 	@DisplayName("Test add 2.0 in the calculator state")
 	void addWithNumbers() {
 		Double numberToAddAndRemove = 2.0;
-		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberToAddAndRemove);
 		expected_state.add(numberToAddAndRemove);
 		expected_state.add(numberToAddAndRemove);
@@ -47,7 +47,6 @@ class CalculatorTest {
 	@DisplayName("Test remove 2.0 in the calculator state")
 	void removeWithNumbers() {
 		Double numberRemove = 2.0;
-		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberRemove);
 		calculator.remove(numberRemove);
 		assertEquals(expected_state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
