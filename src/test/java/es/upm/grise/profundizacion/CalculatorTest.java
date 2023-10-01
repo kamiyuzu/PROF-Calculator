@@ -10,34 +10,34 @@ import org.junit.jupiter.api.Test;
 class CalculatorTest {
 
 	private Calculator calculator;
+	private Vector<Double> state;
 
 	@BeforeEach
 	public void init() {
-		calculator = new Calculator();
+		state = new Vector<Double>();
+		calculator = new Calculator(state);
 	}
 
 	@Test()
 	void initCalculator() {
-		assertEquals(new Vector<Double>(), calculator.numbers, "Checking the numbers from a freshly init Calculator class");
+		Vector<Double> expected_state = new Vector<Double>();
+		assertEquals(expected_state, calculator.numbers, "Checking the numbers from a freshly init Calculator class");
 	}
 
 	@Test()
 	void addWithNumbers() {
 		Double numberToAddAndRemove = 1.0;
-		Vector<Double> expectedNumbers = new Vector<Double>();
-		expectedNumbers.add(numberToAddAndRemove);
-		calculator.add(numberToAddAndRemove);
-		assertEquals(expectedNumbers, calculator.numbers, "Expected " + expectedNumbers + " but got: " + calculator.numbers);
+		state.add(numberToAddAndRemove);
+		assertEquals(state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
 	}
 
 	@Test()
 	void removeWithNumbers() {
-		Vector<Double> state = new Vector<Double>();
 		Double numberToAddAndRemove = 1.0;
 		state.add(numberToAddAndRemove);
-		calculator = new Calculator(state);
 		calculator.remove(numberToAddAndRemove);
-		assertEquals(new Vector<Double>(), calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
+		Vector<Double> expected_state = new Vector<Double>();
+		assertEquals(expected_state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
 	}
 
 	@Test()
@@ -49,31 +49,27 @@ class CalculatorTest {
 
 	@Test()
 	void maxWithNoNumbers() {
-		double expectedMax = Double.MIN_VALUE;
+		Double expectedMax = Double.MIN_VALUE;
 		assertEquals(expectedMax, calculator.max(), "Expected max:" + expectedMax + " but got: " + calculator.max());
 	}
 
 	@Test()
 	void maxWithNumbers() {
-		double expectedMax = 2.0;
-		Vector<Double> state = new Vector<Double>();
+		Double expectedMax = 2.0;
 		state.add(expectedMax);
-		calculator = new Calculator(state);		
 		assertEquals(expectedMax, calculator.max(), "Expected max:" + expectedMax + "but got: " + calculator.max());
 	}
 
 	@Test()
 	void minWithNoNumbers() {
-		double expectedMin = Double.MAX_VALUE;
+		Double expectedMin = Double.MAX_VALUE;
 		assertEquals(expectedMin, calculator.min(), "Expected min:" + expectedMin + "but got: " + calculator.min());
 	}
 
 	@Test()
 	void minWithNumbers() {
-		double expectedMin = 2.0;
-		Vector<Double> state = new Vector<Double>();
+		Double expectedMin = 2.0;
 		state.add(expectedMin);
-		calculator = new Calculator(state);
 		assertEquals(expectedMin, calculator.min(), "Expected min:" + expectedMin + "but got: " + calculator.min());
 	}
 
@@ -85,11 +81,9 @@ class CalculatorTest {
 
 	@Test()
 	void averageWithNumbers() {
-		double expectedAverage = 5.0;
-		Vector<Double> state = new Vector<Double>();
+		Double expectedAverage = 5.0;
 		state.add(2.0);
 		state.add(8.0);
-		calculator = new Calculator(state);
 		assertEquals(expectedAverage, calculator.average(), "Expected average:" + expectedAverage + "but got: " + calculator.average());
 	}
 
@@ -101,11 +95,9 @@ class CalculatorTest {
 
 	@Test()
 	void stddevWithNumbers() {
-		double expectedStddev = 0.0;
-		Vector<Double> state = new Vector<Double>();
+		Double expectedStddev = 0.0;
 		state.add(2.0);
 		state.add(2.0);
-		calculator = new Calculator(state);
 		assertEquals(expectedStddev, calculator.stddev(), "Expected stddev:" + expectedStddev + "but got: " + calculator.stddev());
 	}
 }
