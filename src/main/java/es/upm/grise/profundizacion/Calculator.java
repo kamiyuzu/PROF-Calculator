@@ -10,6 +10,10 @@ public class Calculator {
 	public Calculator(){
 		this.numbers = new Vector<Double>();
 	}
+
+	public Calculator(Vector<Double> numbers){
+		this.numbers = numbers;
+	}
 	
 	// Public methods
 	//
