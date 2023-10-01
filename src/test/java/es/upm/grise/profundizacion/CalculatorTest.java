@@ -22,6 +22,7 @@ class CalculatorTest {
 	}
 
 	@Test()
+	@DisplayName("Test init the calculator state")
 	void initCalculator() {
 		Double numberToAddAndRemove = 2.0;
 		Vector<Double> expected_state = new Vector<Double>();
@@ -31,69 +32,96 @@ class CalculatorTest {
 	}
 
 	@Test()
-	void add() {
+	@DisplayName("Test add 2.0 in the calculator state")
+	void addWithNumbers() {
 		Double numberToAddAndRemove = 2.0;
 		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberToAddAndRemove);
 		expected_state.add(numberToAddAndRemove);
 		expected_state.add(numberToAddAndRemove);
 		calculator.add(numberToAddAndRemove);
-		assertEquals(expected_state, calculator.numbers);
+		assertEquals(expected_state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
 	}
 
 	@Test()
-	void remove() {
+	@DisplayName("Test remove 2.0 in the calculator state")
+	void removeWithNumbers() {
 		Double numberRemove = 2.0;
 		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberRemove);
 		calculator.remove(numberRemove);
-		assertEquals(expected_state, calculator.numbers, "Expected:" + expected_state + " got:" + calculator.numbers);
+		assertEquals(expected_state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
+	}
+
+	@Test()
+	@DisplayName("Test remove without numbers in the calculator state")
+	void removeWithNoNumbers() {
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
 			calculator.remove(-1.0);
-		}, "Checking the removal for a non existing number from the calculator");
+		}, "Expected throw when no numbers in the calculator");
 	}
 
 	@Test()
-	void max() {
+	@DisplayName("Test max without state in the calculator")
+	void maxWithNoNumbers() {
+		Double expectedMax = Double.MIN_VALUE;
+		setNewCalculator();
+		assertEquals(expectedMax, calculator.max(), "Expected max:" + expectedMax + " but got: " + calculator.max());
+	}
+
+	@Test()
+	@DisplayName("Test max with 2.0 and 2.0 in the calculator state")
+	void maxWithNumbers() {
 		Double expectedMax = 2.0;
-		assertEquals(expectedMax, calculator.max(), "Expected:" + expectedMax + " got:" + calculator.max());
-		expectedMax = Double.MIN_VALUE;
-		setNewCalculator();
-		assertEquals(expectedMax, calculator.max(), "Expected:" + expectedMax + " got:" + calculator.max());
+		assertEquals(expectedMax, calculator.max(), "Expected max:" + expectedMax + "but got: " + calculator.max());
 	}
 
 	@Test()
-	void min() {
+	@DisplayName("Test min without state in the calculator")
+	void minWithNoNumbers() {
+		Double expectedMin = Double.MAX_VALUE;
+		setNewCalculator();
+		assertEquals(expectedMin, calculator.min(), "Expected min:" + expectedMin + "but got: " + calculator.min());
+	}
+
+	@Test()
+	@DisplayName("Test min with 2.0 and 2.0 in the calculator state")
+	void minWithNumbers() {
 		Double expectedMin = 2.0;
-		assertEquals(expectedMin, calculator.min(), "Expected:" + expectedMin + " got:" + calculator.min());
-		expectedMin = Double.MAX_VALUE;
-		setNewCalculator();
-		assertEquals(expectedMin, calculator.min(), "Expected:" + expectedMin + " got:" + calculator.min());
+		assertEquals(expectedMin, calculator.min(), "Expected min:" + expectedMin + "but got: " + calculator.min());
 	}
 
 	@Test()
-	void average() {
+	@DisplayName("Test average without state in the calculator")
+	void averageWithNoNumbers() {
+		Double expectedAverage = Double.NaN;
+		setNewCalculator();
+		assertEquals(expectedAverage, calculator.average(), "Expected average:" + expectedAverage + "but got: " + calculator.average());
+	}
+
+	@Test()
+	@DisplayName("Test average with 2.0 and 2.0 in the calculator state")
+	void averageWithNumbers() {
 		Double expectedAverage = 2.0;
-		assertEquals(expectedAverage, calculator.average(),
-				"Expected:" + expectedAverage + " got:" + calculator.average());
-		expectedAverage = Double.NaN;
-		setNewCalculator();
-		assertEquals(expectedAverage, calculator.average(),
-				"Expected:" + expectedAverage + " got:" + calculator.average());
+		assertEquals(expectedAverage, calculator.average(), "Expected average:" + expectedAverage + "but got: " + calculator.average());
 	}
 
 	@Test()
-	void stddev() {
-		Double expectedStddev = 0.0;
-		assertEquals(expectedStddev, calculator.stddev(),
-				"Expected:" + expectedStddev + " got:" + calculator.stddev());
-		expectedStddev = -0.0;
+	@DisplayName("Test stddev without state in the calculator")
+	void stddevWithNoNumbers() {
+		Double expectedStddev = -0.0;
 		setNewCalculator();
-		assertEquals(expectedStddev, calculator.stddev(),
-				"Expected:" + expectedStddev + " got:" + calculator.stddev());
+		assertEquals(expectedStddev, calculator.stddev(), "Expected average:" + expectedStddev + "but got: " + calculator.stddev());
 	}
 
-	private void setNewCalculator() {
+	@Test()
+	@DisplayName("Test stddev with 2.0 and 2.0 in the calculator state")
+	void stddevWithNumbers() {
+		Double expectedStddev = 0.0;
+		assertEquals(expectedStddev, calculator.stddev(), "Expected average:" + expectedStddev + "but got: " + calculator.stddev());
+	}
+
+	private void setNewCalculator(){
 		calculator = new Calculator();
 	}
 }
