@@ -59,7 +59,7 @@ class CalculatorTest {
 	@Test()
 	void maxWithNoNumbers() {
 		Double expectedMax = Double.MIN_VALUE;
-		calculator = new Calculator();
+		setNewCalculator();
 		assertEquals(expectedMax, calculator.max(), "Expected max:" + expectedMax + " but got: " + calculator.max());
 	}
 
@@ -73,7 +73,7 @@ class CalculatorTest {
 	@Test()
 	void minWithNoNumbers() {
 		Double expectedMin = Double.MAX_VALUE;
-		calculator = new Calculator();
+		setNewCalculator();
 		assertEquals(expectedMin, calculator.min(), "Expected min:" + expectedMin + "but got: " + calculator.min());
 	}
 
@@ -86,7 +86,7 @@ class CalculatorTest {
 	@Test()
 	void averageWithNoNumbers() {
 		Double expectedAverage = Double.NaN;
-		calculator = new Calculator();
+		setNewCalculator();
 		assertEquals(expectedAverage, calculator.average(), "Expected average:" + expectedAverage + "but got: " + calculator.average());
 	}
 
@@ -99,7 +99,7 @@ class CalculatorTest {
 	@Test()
 	void stddevWithNoNumbers() {
 		Double expectedStddev = -0.0;
-		calculator = new Calculator();
+		setNewCalculator();
 		assertEquals(expectedStddev, calculator.stddev(), "Expected stddev:" + expectedStddev + "but got: " + calculator.stddev());
 	}
 
@@ -107,5 +107,9 @@ class CalculatorTest {
 	void stddevWithNumbers() {
 		Double expectedStddev = 0.0;
 		assertEquals(expectedStddev, calculator.stddev(), "Expected stddev:" + expectedStddev + "but got: " + calculator.stddev());
+	}
+
+	private void setNewCalculator(){
+		calculator = new Calculator();
 	}
 }
