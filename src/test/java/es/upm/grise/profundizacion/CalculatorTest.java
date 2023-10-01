@@ -40,7 +40,7 @@ class CalculatorTest {
 		expected_state.add(numberToAddAndRemove);
 		expected_state.add(numberToAddAndRemove);
 		calculator.add(numberToAddAndRemove);
-		assertEquals(expected_state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
+		assertEquals(expected_state, calculator.numbers, "Expected " + expected_state + " but got: " + calculator.numbers);
 	}
 
 	@Test()
@@ -49,7 +49,7 @@ class CalculatorTest {
 		Double numberRemove = 2.0;
 		expected_state.add(numberRemove);
 		calculator.remove(numberRemove);
-		assertEquals(expected_state, calculator.numbers, "Expected " + state + " but got: " + calculator.numbers);
+		assertEquals(expected_state, calculator.numbers, "Expected " + expected_state + " but got: " + calculator.numbers);
 	}
 
 	@Test()
