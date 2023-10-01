@@ -27,8 +27,8 @@ class CalculatorTest {
 	@DisplayName("Test init the calculator state")
 	void initCalculator() {
 		Double numberToAddAndRemove = 2.0;
-		expected_state.add(numberToAddAndRemove);
-		expected_state.add(numberToAddAndRemove);
+		AddToCalculator(numberToAddAndRemove);
+		AddToCalculator(numberToAddAndRemove);
 		assertEquals(expected_state, calculator.numbers, "Checking the numbers from a freshly init Calculator class");
 	}
 
@@ -36,9 +36,9 @@ class CalculatorTest {
 	@DisplayName("Test add 2.0 in the calculator state")
 	void addWithNumbers() {
 		Double numberToAddAndRemove = 2.0;
-		expected_state.add(numberToAddAndRemove);
-		expected_state.add(numberToAddAndRemove);
-		expected_state.add(numberToAddAndRemove);
+		AddToCalculator(numberToAddAndRemove);
+		AddToCalculator(numberToAddAndRemove);
+		AddToCalculator(numberToAddAndRemove);
 		calculator.add(numberToAddAndRemove);
 		assertEquals(expected_state, calculator.numbers, "Expected " + expected_state + " but got: " + calculator.numbers);
 	}
@@ -47,7 +47,7 @@ class CalculatorTest {
 	@DisplayName("Test remove 2.0 in the calculator state")
 	void removeWithNumbers() {
 		Double numberRemove = 2.0;
-		expected_state.add(numberRemove);
+		AddToCalculator(numberRemove);
 		calculator.remove(numberRemove);
 		assertEquals(expected_state, calculator.numbers, "Expected " + expected_state + " but got: " + calculator.numbers);
 	}
@@ -122,5 +122,9 @@ class CalculatorTest {
 
 	private void setNewCalculator(){
 		calculator = new Calculator();
+	}
+
+	private void AddToCalculator(Double numberToAdd){
+		expected_state.add(numberToAdd);
 	}
 }
