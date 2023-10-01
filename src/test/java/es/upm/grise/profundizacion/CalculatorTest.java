@@ -22,7 +22,6 @@ class CalculatorTest {
 	}
 
 	@Test()
-	@DisplayName("Test init the calculator state")
 	void initCalculator() {
 		Double numberToAddAndRemove = 2.0;
 		Vector<Double> expected_state = new Vector<Double>();
@@ -32,8 +31,7 @@ class CalculatorTest {
 	}
 
 	@Test()
-	@DisplayName("Test add 2.0 in the calculator state")
-	void addWithNumbers() {
+	void add() {
 		Double numberToAddAndRemove = 2.0;
 		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberToAddAndRemove);
@@ -44,84 +42,58 @@ class CalculatorTest {
 	}
 
 	@Test()
-	@DisplayName("Test remove 2.0 in the calculator state")
-	void removeWithNumbers() {
+	void remove() {
 		Double numberRemove = 2.0;
 		Vector<Double> expected_state = new Vector<Double>();
 		expected_state.add(numberRemove);
 		calculator.remove(numberRemove);
-		assertEquals(expected_state, calculator.numbers);
-	}
-
-	@Test()
-	@DisplayName("Test remove without numbers in the calculator state")
-	void removeWithNoNumbers() {
+		assertEquals(expected_state, calculator.numbers, "Expected:" + expected_state + " got:" + calculator.numbers);
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
 			calculator.remove(-1.0);
-		});
+		}, "Checking the removal for a non existing number from the calculator");
 	}
 
 	@Test()
-	@DisplayName("Test max without state in the calculator")
-	void maxWithNoNumbers() {
-		Double expectedMax = Double.MIN_VALUE;
-		setNewCalculator();
-		assertEquals(expectedMax, calculator.max());
-	}
-
-	@Test()
-	@DisplayName("Test max with 2.0 and 2.0 in the calculator state")
-	void maxWithNumbers() {
+	void max() {
 		Double expectedMax = 2.0;
-		assertEquals(expectedMax, calculator.max());
-	}
-
-	@Test()
-	@DisplayName("Test min without state in the calculator")
-	void minWithNoNumbers() {
-		Double expectedMin = Double.MAX_VALUE;
+		assertEquals(expectedMax, calculator.max(), "Expected:" + expectedMax + " got:" + calculator.max());
+		expectedMax = Double.MIN_VALUE;
 		setNewCalculator();
-		assertEquals(expectedMin, calculator.min());
+		assertEquals(expectedMax, calculator.max(), "Expected:" + expectedMax + " got:" + calculator.max());
 	}
 
 	@Test()
-	@DisplayName("Test min with 2.0 and 2.0 in the calculator state")
-	void minWithNumbers() {
+	void min() {
 		Double expectedMin = 2.0;
-		assertEquals(expectedMin, calculator.min());
-	}
-
-	@Test()
-	@DisplayName("Test average without state in the calculator")
-	void averageWithNoNumbers() {
-		Double expectedAverage = Double.NaN;
+		assertEquals(expectedMin, calculator.min(), "Expected:" + expectedMin + " got:" + calculator.min());
+		expectedMin = Double.MAX_VALUE;
 		setNewCalculator();
-		assertEquals(expectedAverage, calculator.average());
+		assertEquals(expectedMin, calculator.min(), "Expected:" + expectedMin + " got:" + calculator.min());
 	}
 
 	@Test()
-	@DisplayName("Test average with 2.0 and 2.0 in the calculator state")
-	void averageWithNumbers() {
+	void average() {
 		Double expectedAverage = 2.0;
-		assertEquals(expectedAverage, calculator.average());
-	}
-
-	@Test()
-	@DisplayName("Test stddev without state in the calculator")
-	void stddevWithNoNumbers() {
-		Double expectedStddev = -0.0;
+		assertEquals(expectedAverage, calculator.average(),
+				"Expected:" + expectedAverage + " got:" + calculator.average());
+		expectedAverage = Double.NaN;
 		setNewCalculator();
-		assertEquals(expectedStddev, calculator.stddev());
+		assertEquals(expectedAverage, calculator.average(),
+				"Expected:" + expectedAverage + " got:" + calculator.average());
 	}
 
 	@Test()
-	@DisplayName("Test stddev with 2.0 and 2.0 in the calculator state")
-	void stddevWithNumbers() {
+	void stddev() {
 		Double expectedStddev = 0.0;
-		assertEquals(expectedStddev, calculator.stddev());
+		assertEquals(expectedStddev, calculator.stddev(),
+				"Expected:" + expectedStddev + " got:" + calculator.stddev());
+		expectedStddev = -0.0;
+		setNewCalculator();
+		assertEquals(expectedStddev, calculator.stddev(),
+				"Expected:" + expectedStddev + " got:" + calculator.stddev());
 	}
 
-	private void setNewCalculator(){
+	private void setNewCalculator() {
 		calculator = new Calculator();
 	}
 }
